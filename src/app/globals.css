@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ---- Light theme (default) ---- */
+  :root {
+    --surface: 0 0% 100%;
+    --surface-secondary: 0 0% 96%;
+    --surface-tertiary: 0 0% 90%;
+    --content: 240 10% 10%;
+    --content-muted: 240 4% 46%;
+    --border: 240 6% 90%;
+  }
+
+  /* ---- Dark theme ---- */
+  .dark {
+    --surface: 240 10% 8%;
+    --surface-secondary: 240 8% 12%;
+    --surface-tertiary: 240 6% 18%;
+    --content: 0 0% 93%;
+    --content-muted: 240 4% 60%;
+    --border: 240 4% 20%;
+  }
+
+  /* ---- Base reset ---- */
+  *,
+  *::before,
+  *::after {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-surface text-content antialiased;
+    font-family: var(--font-inter), system-ui, sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ---- Selection colors ---- */
+  ::selection {
+    background-color: hsl(var(--content) / 0.15);
+    color: hsl(var(--content));
+  }
+
+  /* ---- Scrollbar styling ---- */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--content-muted) / 0.5);
+  }
+
+  /* Firefox scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  /* ---- Focus ring reset ---- */
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent/50 ring-offset-2 ring-offset-surface;
+  }
+}
+
+@layer components {
+  /* Smooth transitions for theme changes */
+  .theme-transition * {
+    transition: background-color 0.2s ease, border-color 0.2s ease,
+      color 0.2s ease, box-shadow 0.2s ease;
+  }
+}
