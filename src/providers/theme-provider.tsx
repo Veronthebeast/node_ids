@@ -56,6 +56,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }
   }, [isDark]);
 
+  // Save theme changes to localStorage
+  useEffect(() => {
+    localStorage.setItem('nodeids-theme', theme);
+  }, [theme]);
+
   // On first mount, read from localStorage or system preference
   useEffect(() => {
     const stored = localStorage.getItem('nodeids-theme') as ThemeMode | null;

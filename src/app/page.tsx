@@ -1,8 +1,15 @@
-export default function Home() {
-  return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold">NodeIDs</h1>
-      <p className="mt-2 text-content-muted">Professional infinite whiteboard</p>
-    </div>
-  );
+import { redirect } from 'next/navigation';
+import { createClient } from '@/lib/supabase/server';
+
+export default async function Home() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user) {
+    redirect('/dashboard');
+  } else {
+    redirect('/login');
+  }
 }
