@@ -24,7 +24,9 @@ import {
   Search,
   Calendar,
   ExternalLink,
+  Menu,
 } from 'lucide-react';
+import { useUIStore } from '@/stores/ui-store';
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -125,8 +127,24 @@ export default function DashboardPage() {
     });
   };
 
+  const setMobileSidebarOpen = useUIStore((s) => s.setMobileSidebarOpen);
+
   return (
-    <div className="flex-1 p-6 md:p-8 overflow-y-auto bg-surface-secondary/40">
+    <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+      {/* Cabecera Móvil */}
+      <header className="h-14 border-b border-border bg-surface px-4 flex justify-between items-center md:hidden shrink-0">
+        <span className="font-extrabold text-base tracking-tight text-accent">NodeIDs</span>
+        <button
+          type="button"
+          onClick={() => setMobileSidebarOpen(true)}
+          className="p-1.5 hover:bg-surface-secondary rounded-md cursor-pointer"
+          title="Abrir menú"
+        >
+          <Menu className="w-5 h-5 text-content" />
+        </button>
+      </header>
+
+      <div className="flex-1 p-6 md:p-8 overflow-y-auto bg-surface-secondary/40">
       {/* Premium Gradient Hero Panel */}
       <div className="relative mb-8 rounded-2xl bg-gradient-to-r from-accent/90 via-accent to-purple-600 p-8 text-white shadow-lg overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent pointer-events-none" />
@@ -387,6 +405,7 @@ export default function DashboardPage() {
           Esta acción no se puede deshacer. Se eliminarán permanentemente la pizarra, todos los nodos creados, las checklists y sus conexiones asociadas.
         </p>
       </Dialog>
+      </div>
     </div>
   );
 }

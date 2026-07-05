@@ -61,7 +61,7 @@ export function PropertiesPanel() {
 
   if (!selectedNode) {
     return (
-      <aside className="w-80 border-l border-border bg-surface flex flex-col h-full z-10 shrink-0">
+      <aside className="w-80 border-l border-border bg-surface flex flex-col h-full shrink-0 md:relative absolute inset-y-0 right-0 z-20">
         <div className="p-4 border-b border-border flex justify-between items-center">
           <h3 className="font-semibold text-content text-sm">Propiedades</h3>
           <Button variant="ghost" size="sm" onClick={toggleRightPanel} className="p-1 h-auto">
@@ -111,7 +111,7 @@ export function PropertiesPanel() {
   };
 
   return (
-    <aside className="w-80 border-l border-border bg-surface flex flex-col h-full z-10 shrink-0 shadow-lg animate-in slide-in-from-right duration-200">
+    <aside className="w-80 border-l border-border bg-surface flex flex-col h-full shrink-0 shadow-lg animate-in slide-in-from-right duration-200 md:relative absolute inset-y-0 right-0 z-20">
       {/* Header */}
       <div className="p-4 border-b border-border flex justify-between items-center shrink-0">
         <div>

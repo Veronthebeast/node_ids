@@ -32,6 +32,8 @@ export interface UIState {
   rightPanelOpen: boolean;
   /** Which panel tab is currently active. */
   activePanel: ActivePanel;
+  /** Whether the mobile navigation sidebar is open. */
+  mobileSidebarOpen: boolean;
 
   // ---- Actions -----------------------------------------------------------
 
@@ -45,6 +47,8 @@ export interface UIState {
   toggleRightPanel: () => void;
   /** Switch the active panel (or set to `'none'`). */
   setActivePanel: (panel: ActivePanel) => void;
+  /** Set mobile sidebar open/closed. */
+  setMobileSidebarOpen: (open: boolean) => void;
 }
 
 // ---------------------------------------------------------------------------
@@ -57,6 +61,7 @@ export const useUIStore = create<UIState>()(
     leftPanelOpen: true,
     rightPanelOpen: true,
     activePanel: 'none',
+    mobileSidebarOpen: false,
 
     toggleTheme: () => {
       set((state) => {
@@ -85,6 +90,12 @@ export const useUIStore = create<UIState>()(
     setActivePanel: (panel) => {
       set((state) => {
         state.activePanel = panel;
+      });
+    },
+
+    setMobileSidebarOpen: (open) => {
+      set((state) => {
+        state.mobileSidebarOpen = open;
       });
     },
   })),

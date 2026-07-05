@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import {
   ReactFlow,
   MiniMap,
@@ -57,7 +58,7 @@ function CanvasInner({ projectId }: { projectId: string }) {
   const addEdgeDb = useConnectionsStore((s) => s.addEdgeDb);
 
   const { projects, fetchProjects } = useProjectsStore();
-  const { leftPanelOpen, rightPanelOpen, toggleLeftPanel, toggleRightPanel, theme } = useUIStore();
+  const { leftPanelOpen, rightPanelOpen, toggleLeftPanel, toggleRightPanel, theme, setMobileSidebarOpen } = useUIStore();
 
   const [saving, setSaving] = useState(false);
   const [shareDialogOpen, setShareDialogOpen] = useState(false);
@@ -176,17 +177,20 @@ function CanvasInner({ projectId }: { projectId: string }) {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-surface">
-      {/* Pizarra Header Bar */}
-      <header className="h-16 border-b border-border bg-surface px-4 flex items-center justify-between z-10 shrink-0">
+      {/* Canvas Page Header */}
+      <header className="h-14 border-b border-border bg-surface px-4 flex justify-between items-center shrink-0 z-10">
         <div className="flex items-center gap-3">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => router.push('/dashboard')}
-            className="p-1 h-auto"
+          <button
+            type="button"
+            onClick={() => setMobileSidebarOpen(true)}
+            className="p-1.5 hover:bg-surface-secondary rounded-md md:hidden cursor-pointer"
+            title="Abrir menú"
           >
-            <ArrowLeft className="w-5 h-5 text-content" />
-          </Button>
+            <Menu className="w-5 h-5 text-content" />
+          </button>
+          <Link href="/dashboard" className="text-content-muted hover:text-content transition-colors">
+            <ArrowLeft className="w-5 h-5" />
+          </Link>
           <div className="h-4 w-px bg-border" />
           <div>
             <h1 className="font-semibold text-content text-sm md:text-base leading-none">

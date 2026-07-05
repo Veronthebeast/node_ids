@@ -78,6 +78,9 @@ export function LeftPanel({ projectId }: { projectId: string }) {
       duration: 600,
     });
     setSelectedNodes([node.id]);
+    if (window.innerWidth < 768) {
+      toggleLeftPanel();
+    }
   };
 
   const handleCreateQuickNode = () => {
@@ -89,7 +92,7 @@ export function LeftPanel({ projectId }: { projectId: string }) {
   };
 
   return (
-    <aside className="w-80 border-r border-border bg-surface flex flex-col h-full z-10 shrink-0 shadow-lg animate-in slide-in-from-left duration-200">
+    <aside className="w-80 border-r border-border bg-surface flex flex-col h-full shrink-0 shadow-lg animate-in slide-in-from-left duration-200 md:relative absolute inset-y-0 left-0 z-20">
       {/* Tabs headers */}
       <div className="flex border-b border-border shrink-0">
         <button
