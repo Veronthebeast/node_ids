@@ -39,7 +39,7 @@ export function CustomNode({ id, data, selected }: NodeProps & { data: NodeData 
   return (
     <div
       className={cn(
-        'w-72 rounded-2xl border bg-surface text-content shadow-sm transition-all duration-200 ease-in-out select-none',
+        'w-64 rounded-2xl border bg-surface text-content shadow-sm transition-all duration-200 ease-in-out select-none',
         'hover:shadow-md hover:border-content-muted/30',
         selected ? 'border-accent ring-2 ring-accent/30 scale-[1.01]' : 'border-border'
       )}
@@ -120,10 +120,10 @@ export function CustomNode({ id, data, selected }: NodeProps & { data: NodeData 
 
         {/* Title and Description */}
         <div>
-          <h4 className="font-bold text-sm tracking-tight text-content line-clamp-1 leading-snug">
+          <h4 className="font-bold text-xs tracking-tight text-content line-clamp-1 leading-snug">
             {data.title || 'Sin Título'}
           </h4>
-          <p className="text-xs text-content-muted mt-1.5 line-clamp-3 leading-relaxed whitespace-pre-wrap">
+          <p className="text-[11px] text-content-muted mt-1 leading-normal line-clamp-3 whitespace-pre-wrap">
             {data.description || 'Haga doble clic en la pizarra para editar propiedades.'}
           </p>
         </div>

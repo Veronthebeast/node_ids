@@ -190,38 +190,38 @@ function CanvasInner({ projectId }: { projectId: string }) {
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-surface">
       {/* Canvas Page Header */}
-      <header className="h-14 border-b border-border bg-surface px-4 flex justify-between items-center shrink-0 z-10">
+      <header className="h-12 border-b border-border bg-surface px-4 flex justify-between items-center shrink-0 z-10">
         <div className="flex items-center gap-3">
           <Link
             href="/dashboard"
-            className="p-2 hover:bg-surface-secondary text-content-muted hover:text-content rounded-xl border border-border bg-surface shadow-sm cursor-pointer transition-all duration-150 active:scale-95"
+            className="p-1.5 hover:bg-surface-secondary text-content-muted hover:text-content rounded-lg border border-border bg-surface shadow-sm cursor-pointer transition-all duration-150 active:scale-95"
             title="Volver al Tablero"
           >
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className="w-4 h-4" />
           </Link>
           <div className="h-4 w-px bg-border" />
           <div>
-            <h1 className="font-semibold text-content text-sm md:text-base leading-none">
+            <h1 className="font-semibold text-content text-xs md:text-sm leading-none">
               {currentProject ? currentProject.name : 'Cargando pizarra...'}
             </h1>
-            <p className="text-xs text-content-muted mt-1 leading-none hidden sm:block">
+            <p className="text-[10px] text-content-muted mt-1 leading-none hidden sm:block">
               {currentProject?.description || 'Lienzo infinito interactivo'}
             </p>
           </div>
         </div>
 
         {/* Save Sync indicators and Theme Toggle */}
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-1.5 text-xs">
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 text-[11px]">
             {saving ? (
               <>
-                <Loader className="w-3.5 h-3.5 text-accent animate-spin" />
-                <span className="text-accent font-medium hidden md:inline">Guardando cambios...</span>
+                <Loader className="w-3 h-3 text-accent animate-spin" />
+                <span className="text-accent font-medium hidden md:inline">Guardando...</span>
               </>
             ) : (
               <>
-                <CheckCircle className="w-3.5 h-3.5 text-green-500" />
-                <span className="text-content-muted hidden md:inline">Guardado en Supabase</span>
+                <CheckCircle className="w-3 h-3 text-green-500" />
+                <span className="text-content-muted hidden md:inline">Guardado</span>
               </>
             )}
           </div>
@@ -232,9 +232,9 @@ function CanvasInner({ projectId }: { projectId: string }) {
               variant="secondary"
               size="sm"
               onClick={() => setShareDialogOpen(true)}
-              className="text-xs h-8 px-2 md:px-3"
+              className="text-[11px] h-7 px-2 md:px-2.5"
             >
-              <Share2 className="w-4 h-4 md:mr-1.5 mr-0" />
+              <Share2 className="w-3.5 h-3.5 md:mr-1 mr-0" />
               <span className="hidden md:inline">Compartir</span>
             </Button>
           )}
@@ -244,9 +244,9 @@ function CanvasInner({ projectId }: { projectId: string }) {
             variant="primary"
             size="sm"
             onClick={handleAddNodeAtCenter}
-            className="px-2 md:px-3"
+            className="text-[11px] h-7 px-2 md:px-2.5"
           >
-            <Plus className="w-4 h-4 md:mr-1.5 mr-0" />
+            <Plus className="w-3.5 h-3.5 md:mr-1 mr-0" />
             <span className="hidden md:inline">Nodo</span>
           </Button>
 
@@ -254,10 +254,10 @@ function CanvasInner({ projectId }: { projectId: string }) {
             variant="ghost"
             size="sm"
             onClick={toggleLeftPanel}
-            className="p-1.5 h-auto"
+            className="p-1 h-7 w-7 flex items-center justify-center text-content rounded-md hover:bg-surface-secondary"
             title="Panel Izquierdo"
           >
-            <Menu className="w-5 h-5 text-content" />
+            <Menu className="w-4.5 h-4.5" />
           </Button>
         </div>
       </header>

@@ -61,7 +61,7 @@ export function PropertiesPanel() {
 
   if (!selectedNode) {
     return (
-      <aside className="w-[85vw] max-w-[320px] md:w-80 border-l border-border bg-surface flex flex-col h-full shrink-0 md:relative absolute inset-y-0 right-0 z-20">
+      <aside className="w-[85vw] max-w-[280px] md:w-[280px] border-l border-border bg-surface flex flex-col h-full shrink-0 md:relative absolute inset-y-0 right-0 z-20">
         <div className="p-4 border-b border-border flex justify-between items-center">
           <h3 className="font-semibold text-content text-sm">Propiedades</h3>
           <Button variant="ghost" size="sm" onClick={toggleRightPanel} className="p-1 h-auto">
@@ -111,12 +111,12 @@ export function PropertiesPanel() {
   };
 
   return (
-    <aside className="w-[85vw] max-w-[320px] md:w-80 border-l border-border bg-surface flex flex-col h-full shrink-0 shadow-lg animate-in slide-in-from-right duration-200 md:relative absolute inset-y-0 right-0 z-20">
+    <aside className="w-[85vw] max-w-[280px] md:w-[280px] border-l border-border bg-surface flex flex-col h-full shrink-0 shadow-lg animate-in slide-in-from-right duration-200 md:relative absolute inset-y-0 right-0 z-20">
       {/* Header */}
-      <div className="p-4 border-b border-border flex justify-between items-center shrink-0">
+      <div className="px-3 py-2 border-b border-border flex justify-between items-center shrink-0">
         <div>
-          <h3 className="font-bold text-content text-sm">Editar Nodo</h3>
-          <span className="text-[10px] text-content-muted font-mono">{selectedNode.id}</span>
+          <h3 className="font-bold text-content text-xs">Editar Nodo</h3>
+          <span className="text-[9px] text-content-muted font-mono">{selectedNode.id}</span>
         </div>
         <div className="flex items-center gap-1">
           <button
@@ -141,7 +141,7 @@ export function PropertiesPanel() {
       </div>
 
       {/* Editor Body */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-6">
+      <div className="flex-1 overflow-y-auto p-3 space-y-4">
         {/* Title */}
         <div className="space-y-1.5">
           <label className="text-xs font-semibold text-content-muted uppercase tracking-wider">
@@ -152,7 +152,7 @@ export function PropertiesPanel() {
             value={data.title}
             onChange={(e) => handleFieldChange('title', e.target.value)}
             placeholder="Título del nodo..."
-            className="w-full rounded-panel border border-border bg-surface px-3 py-2 text-sm text-content font-semibold focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent/40 transition-colors"
+            className="w-full rounded-panel border border-border bg-surface px-2.5 py-1.5 text-xs text-content font-semibold focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent/40 transition-colors"
           />
         </div>
 
@@ -162,17 +162,17 @@ export function PropertiesPanel() {
             <Palette className="w-3.5 h-3.5" />
             <span>Color de Acento</span>
           </div>
-          <div className="grid grid-cols-5 gap-2 pt-1">
+          <div className="grid grid-cols-5 gap-1.5 pt-1">
             {COLOR_PALETTE.map((color) => (
               <button
                 key={color}
                 type="button"
                 onClick={() => handleFieldChange('color', color)}
-                className="w-8 h-8 rounded-full border border-border flex items-center justify-center transition-transform hover:scale-110 active:scale-95 cursor-pointer shadow-sm relative"
+                className="w-7 h-7 rounded-full border border-border flex items-center justify-center transition-transform hover:scale-110 active:scale-95 cursor-pointer shadow-sm relative"
                 style={{ backgroundColor: color }}
               >
                 {data.color === color && (
-                  <Check className="w-4 h-4 text-white drop-shadow-md" />
+                  <Check className="w-3.5 h-3.5 text-white drop-shadow-md" />
                 )}
               </button>
             ))}
@@ -184,7 +184,7 @@ export function PropertiesPanel() {
           <label className="text-xs font-semibold text-content-muted uppercase tracking-wider">
             Prioridad
           </label>
-          <div className="grid grid-cols-2 gap-2 pt-1">
+          <div className="grid grid-cols-2 gap-1.5 pt-1">
             {PRIORITIES.map((p) => {
               const isActive = data.priority === p.value;
               return (
@@ -193,7 +193,7 @@ export function PropertiesPanel() {
                   type="button"
                   onClick={() => handleFieldChange('priority', p.value)}
                   className={cn(
-                    'px-3 py-2 rounded-panel border text-xs font-medium transition-all text-center',
+                    'px-2 py-1.5 rounded-panel border text-[11px] font-semibold flex items-center justify-center gap-1 cursor-pointer transition-colors',
                     isActive
                       ? p.color + ' border-current font-semibold ring-1 ring-current'
                       : 'border-border bg-surface text-content hover:bg-surface-secondary'
@@ -216,7 +216,7 @@ export function PropertiesPanel() {
             value={data.description}
             onChange={(e) => handleFieldChange('description', e.target.value)}
             placeholder="Escribe una descripción sobre este nodo..."
-            className="w-full rounded-panel border border-border bg-surface px-3 py-2 text-xs text-content focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent/40 transition-colors resize-none leading-relaxed"
+            className="w-full rounded-panel border border-border bg-surface px-2.5 py-1.5 text-xs text-content focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent/40 transition-colors resize-none leading-relaxed"
           />
         </div>
 
@@ -231,12 +231,12 @@ export function PropertiesPanel() {
             value={data.notes}
             onChange={(e) => handleFieldChange('notes', e.target.value)}
             placeholder="Notas detalladas, enlaces o anotaciones extras..."
-            className="w-full rounded-panel border border-border bg-surface px-3 py-2 text-xs text-content font-mono focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent/40 transition-colors resize-y leading-relaxed"
+            className="w-full rounded-panel border border-border bg-surface px-2.5 py-1.5 text-xs text-content font-mono focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent/40 transition-colors resize-y leading-relaxed"
           />
         </div>
 
         {/* Hashtags */}
-        <div className="space-y-2 border-t border-border pt-4">
+        <div className="space-y-1.5 border-t border-border pt-3">
           <div className="flex items-center gap-1.5 text-xs font-semibold text-content-muted uppercase tracking-wider">
             <TagIcon className="w-3.5 h-3.5" />
             <span>Etiquetas</span>
@@ -247,7 +247,7 @@ export function PropertiesPanel() {
               placeholder="Nueva etiqueta..."
               value={newTag}
               onChange={(e) => setNewTag(e.target.value)}
-              className="h-8 flex-1 rounded-panel border border-border bg-surface px-3 text-xs text-content focus:border-accent focus:outline-none"
+              className="h-8 flex-1 rounded-panel border border-border bg-surface px-2.5 text-xs text-content focus:border-accent focus:outline-none"
             />
             <Button type="submit" size="sm" className="h-8 px-2.5">
               <Plus className="w-4 h-4" />
@@ -275,7 +275,7 @@ export function PropertiesPanel() {
         </div>
 
         {/* Checklist Section */}
-        <div className="space-y-3 border-t border-border pt-4">
+        <div className="space-y-2 border-t border-border pt-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1.5 text-xs font-semibold text-content-muted uppercase tracking-wider">
               <CheckSquare className="w-3.5 h-3.5" />
@@ -295,7 +295,7 @@ export function PropertiesPanel() {
               placeholder="Nueva tarea..."
               value={newTodoText}
               onChange={(e) => setNewTodoText(e.target.value)}
-              className="h-8 flex-1 rounded-panel border border-border bg-surface px-3 text-xs text-content focus:border-accent focus:outline-none"
+              className="h-8 flex-1 rounded-panel border border-border bg-surface px-2.5 text-xs text-content focus:border-accent focus:outline-none"
             />
             <Button type="submit" size="sm" className="h-8 px-2.5 bg-green-600 hover:bg-green-700">
               <Plus className="w-4 h-4" />

@@ -72,9 +72,9 @@ export function LeftPanel({ projectId }: { projectId: string }) {
 
   // Center canvas on node coordinates smoothly
   const handleFocusNode = (node: Node) => {
-    // 144 is half of custom node width (72 * 4 = w-72 = 288px / 2 = 144)
-    // 70 is rough estimate of node height/2
-    setCenter(node.position.x + 144, node.position.y + 70, {
+    // 128 is half of custom node width (256px / 2 = 128)
+    // 60 is rough estimate of node height/2
+    setCenter(node.position.x + 128, node.position.y + 60, {
       zoom: 1.3,
       duration: 600,
     });
@@ -93,9 +93,9 @@ export function LeftPanel({ projectId }: { projectId: string }) {
   };
 
   return (
-    <aside className="w-[85vw] max-w-[320px] md:w-80 border-r border-border bg-surface flex flex-col h-full shrink-0 shadow-lg animate-in slide-in-from-left duration-200 md:relative absolute inset-y-0 left-0 z-20">
+    <aside className="w-[85vw] max-w-[280px] md:w-[280px] border-r border-border bg-surface flex flex-col h-full shrink-0 shadow-lg animate-in slide-in-from-left duration-200 md:relative absolute inset-y-0 left-0 z-20">
       {/* Cabecera Móvil */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-border shrink-0 md:hidden bg-surface-secondary/40">
+      <div className="flex items-center justify-between px-3 py-2 border-b border-border shrink-0 md:hidden bg-surface-secondary/40">
         <span className="text-xs font-bold text-content-muted">Buscador y Pizarras</span>
         <button
           type="button"
@@ -113,7 +113,7 @@ export function LeftPanel({ projectId }: { projectId: string }) {
           type="button"
           onClick={() => setActiveTab('nodes')}
           className={cn(
-            'flex-1 py-3 text-xs font-semibold uppercase tracking-wider text-center border-b-2 transition-colors cursor-pointer',
+            'flex-1 py-2 text-xs font-semibold uppercase tracking-wider text-center border-b-2 transition-colors cursor-pointer',
             activeTab === 'nodes'
               ? 'border-accent text-accent'
               : 'border-transparent text-content-muted hover:text-content hover:bg-surface-secondary/50'
@@ -125,7 +125,7 @@ export function LeftPanel({ projectId }: { projectId: string }) {
           type="button"
           onClick={() => setActiveTab('projects')}
           className={cn(
-            'flex-1 py-3 text-xs font-semibold uppercase tracking-wider text-center border-b-2 transition-colors cursor-pointer',
+            'flex-1 py-2 text-xs font-semibold uppercase tracking-wider text-center border-b-2 transition-colors cursor-pointer',
             activeTab === 'projects'
               ? 'border-accent text-accent'
               : 'border-transparent text-content-muted hover:text-content hover:bg-surface-secondary/50'
@@ -137,7 +137,7 @@ export function LeftPanel({ projectId }: { projectId: string }) {
 
       {/* Tab Panels */}
       {activeTab === 'nodes' ? (
-        <div className="flex-1 flex flex-col overflow-hidden p-4 space-y-4">
+        <div className="flex-1 flex flex-col overflow-hidden p-3 space-y-3">
           {/* Quick Node Trigger */}
           <Button onClick={handleCreateQuickNode} size="sm" className="w-full shrink-0">
             <Plus className="w-4 h-4 mr-1.5" />
@@ -262,7 +262,7 @@ export function LeftPanel({ projectId }: { projectId: string }) {
         </div>
       ) : (
         /* Tab Proyectos */
-        <div className="flex-1 flex flex-col overflow-hidden p-4 space-y-4">
+        <div className="flex-1 flex flex-col overflow-hidden p-3 space-y-3">
           <span className="text-[10px] font-bold text-content-muted uppercase tracking-wider shrink-0">
             Cambiar de Pizarra
           </span>
