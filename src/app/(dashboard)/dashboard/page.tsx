@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
 import { useProjectsStore } from '@/stores/projects-store';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -131,16 +133,25 @@ export default function DashboardPage() {
 
   return (
     <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-      {/* Cabecera Móvil */}
-      <header className="h-14 border-b border-border bg-surface px-4 flex justify-between items-center md:hidden shrink-0">
-        <span className="font-extrabold text-base tracking-tight text-accent">NodeIDs</span>
+      {/* Cabecera Móvil Premium */}
+      <header className="h-16 border-b border-border bg-surface px-4 flex justify-between items-center md:hidden shrink-0">
+        <Link href="/dashboard" className="flex items-center gap-2">
+          <Image
+            src="/logo.png"
+            alt="NodeIDs Logo"
+            width={90}
+            height={24}
+            className="h-6 w-auto dark:invert"
+            priority
+          />
+        </Link>
         <button
           type="button"
           onClick={() => setMobileSidebarOpen(true)}
-          className="p-1.5 hover:bg-surface-secondary rounded-md cursor-pointer"
+          className="p-2 hover:bg-surface-secondary text-content-muted hover:text-content rounded-xl border border-border bg-surface shadow-sm cursor-pointer transition-all duration-150 active:scale-95"
           title="Abrir menú"
         >
-          <Menu className="w-5 h-5 text-content" />
+          <Menu className="w-5 h-5" />
         </button>
       </header>
 

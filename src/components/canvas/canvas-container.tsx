@@ -180,15 +180,11 @@ function CanvasInner({ projectId }: { projectId: string }) {
       {/* Canvas Page Header */}
       <header className="h-14 border-b border-border bg-surface px-4 flex justify-between items-center shrink-0 z-10">
         <div className="flex items-center gap-3">
-          <button
-            type="button"
-            onClick={() => setMobileSidebarOpen(true)}
-            className="p-1.5 hover:bg-surface-secondary rounded-md md:hidden cursor-pointer"
-            title="Abrir menú"
+          <Link
+            href="/dashboard"
+            className="p-2 hover:bg-surface-secondary text-content-muted hover:text-content rounded-xl border border-border bg-surface shadow-sm cursor-pointer transition-all duration-150 active:scale-95"
+            title="Volver al Tablero"
           >
-            <Menu className="w-5 h-5 text-content" />
-          </button>
-          <Link href="/dashboard" className="text-content-muted hover:text-content transition-colors">
             <ArrowLeft className="w-5 h-5" />
           </Link>
           <div className="h-4 w-px bg-border" />
