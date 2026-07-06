@@ -4,6 +4,7 @@ import { Handle, Position, type NodeProps } from '@xyflow/react';
 import type { NodeData } from '@/types/node';
 import { useNodesStore } from '@/stores/nodes-store';
 import { cn } from '@/lib/utils';
+import { useUIStore } from '@/stores/ui-store';
 import { ClipboardList, FileText, AlertTriangle, Trash2 } from 'lucide-react';
 
 const priorityConfig = {
@@ -52,10 +53,9 @@ export function CustomNode({ id, data, selected }: NodeProps & { data: NodeData 
           type="button"
           onClick={async (e) => {
             e.stopPropagation();
-            if (confirm('¿Deseas eliminar este nodo?')) {
-              const removeNodeDb = useNodesStore.getState().removeNodeDb;
-              await removeNodeDb(id);
-            }
+            const removeNodeDb = useNodesStore.getState().removeNodeDb;
+            await removeNodeDb(id);
+            useUIStore.getState().addToast('Nodo eliminado. Presione Ctrl+Z para deshacer.', 'info');
           }}
           className="absolute -top-3.5 -right-3.5 p-1.5 bg-red-600 hover:bg-red-700 text-white rounded-full shadow-md z-20 cursor-pointer hover:scale-110 active:scale-95 transition-transform"
           title="Eliminar Nodo"

@@ -19,6 +19,12 @@ import { immer } from 'zustand/middleware/immer';
 export type ThemeMode = 'light' | 'dark';
 export type ActivePanel = 'none' | 'properties' | 'search';
 
+export interface Toast {
+  id: string;
+  message: string;
+  type: 'success' | 'info' | 'error';
+}
+
 // ---------------------------------------------------------------------------
 // State shape
 // ---------------------------------------------------------------------------
@@ -34,6 +40,8 @@ export interface UIState {
   activePanel: ActivePanel;
   /** Whether the mobile navigation sidebar is open. */
   mobileSidebarOpen: boolean;
+  /** Global active toasts. */
+  toasts: Toast[];
 
   // ---- Actions -----------------------------------------------------------
 
@@ -49,6 +57,10 @@ export interface UIState {
   setActivePanel: (panel: ActivePanel) => void;
   /** Set mobile sidebar open/closed. */
   setMobileSidebarOpen: (open: boolean) => void;
+  /** Add a toast notification. */
+  addToast: (message: string, type?: 'success' | 'info' | 'error') => void;
+  /** Remove a toast notification. */
+  removeToast: (id: string) => void;
 }
 
 // ---------------------------------------------------------------------------
@@ -62,6 +74,7 @@ export const useUIStore = create<UIState>()(
     rightPanelOpen: true,
     activePanel: 'none',
     mobileSidebarOpen: false,
+    toasts: [],
 
     toggleTheme: () => {
       set((state) => {
@@ -96,6 +109,22 @@ export const useUIStore = create<UIState>()(
     setMobileSidebarOpen: (open) => {
       set((state) => {
         state.mobileSidebarOpen = open;
+      });
+    },
+
+    addToast: (message, type = 'success') => {
+      const id = Math.random().toString(36).substring(2, 9);
+      set((state) => {
+        state.toasts.push({ id, message, type });
+      });
+      setTimeout(() => {
+        useUIStore.getState().removeToast(id);
+      }, 4000);
+    },
+
+    removeToast: (id) => {
+      set((state) => {
+        state.toasts = state.toasts.filter((t) => t.id !== id);
       });
     },
   })),

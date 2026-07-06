@@ -122,9 +122,8 @@ export function PropertiesPanel() {
           <button
             type="button"
             onClick={async () => {
-              if (confirm('¿Estás seguro de que deseas eliminar este nodo?')) {
-                await removeNodeDb(selectedNode.id);
-              }
+              await removeNodeDb(selectedNode.id);
+              useUIStore.getState().addToast('Nodo eliminado. Presione Ctrl+Z para deshacer.', 'info');
             }}
             className="p-1.5 text-content-muted hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20 rounded-md transition-colors cursor-pointer"
             title="Eliminar Nodo"

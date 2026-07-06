@@ -8,6 +8,7 @@ import type { Node, Edge } from '@xyflow/react';
 import type { NodeData } from '@/types/node';
 import type { ConnectionData } from '@/types/connection';
 import { createClient } from '@/lib/supabase/client';
+import { useUIStore } from '@/stores/ui-store';
 
 export function useKeyboardShortcuts(projectId: string) {
   // Sincronización de Stores
@@ -109,6 +110,7 @@ export function useKeyboardShortcuts(projectId: string) {
           setNodes(snapshotNodes);
           setEdges(snapshotEdges);
           await syncSnapshotToDb(snapshotNodes, snapshotEdges);
+          useUIStore.getState().addToast('Cambio deshecho', 'info');
         }
       }
 
@@ -122,6 +124,7 @@ export function useKeyboardShortcuts(projectId: string) {
           setNodes(snapshotNodes);
           setEdges(snapshotEdges);
           await syncSnapshotToDb(snapshotNodes, snapshotEdges);
+          useUIStore.getState().addToast('Cambio rehecho', 'info');
         }
       }
 
@@ -132,6 +135,7 @@ export function useKeyboardShortcuts(projectId: string) {
         console.log('Forzando guardado manual...');
         takeSnapshot();
         await syncSnapshotToDb(useNodesStore.getState().nodes, useConnectionsStore.getState().edges);
+        useUIStore.getState().addToast('Pizarra guardada', 'success');
       }
 
       // Ctrl + A: Select All Nodes
@@ -148,6 +152,7 @@ export function useKeyboardShortcuts(projectId: string) {
         const selectedNodes = currentNodes.filter((n) => selectedNodeIds.includes(n.id));
         if (selectedNodes.length > 0) {
           clipboardRef.current = JSON.parse(JSON.stringify(selectedNodes));
+          useUIStore.getState().addToast(`${selectedNodes.length} nodo(s) copiado(s)`, 'info');
         }
       }
 
@@ -181,6 +186,7 @@ export function useKeyboardShortcuts(projectId: string) {
 
           if (newSelectedIds.length > 0) {
             setSelectedNodes(newSelectedIds);
+            useUIStore.getState().addToast(`${newSelectedIds.length} nodo(s) pegado(s)`, 'success');
           }
         }
       }
@@ -206,6 +212,8 @@ export function useKeyboardShortcuts(projectId: string) {
           // Deselect
           setSelectedNodes([]);
           setSelectedEdges([]);
+
+          useUIStore.getState().addToast('Elementos eliminados', 'info');
         }
       }
     };
