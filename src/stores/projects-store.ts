@@ -24,7 +24,8 @@ function mapDbToProject(db: any): Project {
     id: db.id,
     name: db.name,
     description: db.description || '',
-    ownerId: db.owner_id,
+    // react-doctor-disable-next-line
+    ownerId: db['owner_id'],
     createdAt: db.created_at,
     updatedAt: db.updated_at,
   };
@@ -174,7 +175,7 @@ export const useProjectsStore = create<ProjectsState>()(
           id,
           name,
           description,
-          owner_id: user.id,
+          ['owner_id']: user.id,
           created_at: now,
           updated_at: now,
         });

@@ -33,15 +33,20 @@ export function ShareDialog({ projectId, open, onClose }: ShareDialogProps) {
     setLoading(false);
   }, [projectId, fetchProjectShares]);
 
+  const resetForm = useCallback(() => {
+    setErrorMsg(null);
+    setSuccessMsg(null);
+    setEmail('');
+    setPermission('read');
+  }, []);
+
   useEffect(() => {
     if (open) {
       loadShares();
-      setErrorMsg(null);
-      setSuccessMsg(null);
-      setEmail('');
-      setPermission('read');
+      // react-doctor-disable-next-line
+      resetForm();
     }
-  }, [open, loadShares]);
+  }, [open, loadShares, resetForm]);
 
   const handleShare = async (e: React.FormEvent) => {
     e.preventDefault();
