@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description:
     'Professional infinite whiteboard — build flows with connected nodes',
   icons: {
-    icon: '/favicon.ico',
+    icon: '/icon.png',
   },
 };
 

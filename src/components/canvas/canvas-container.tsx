@@ -255,6 +255,14 @@ function CanvasInner({ projectId }: { projectId: string }) {
 
       {/* Main workspace layout */}
       <div className="flex-1 flex overflow-hidden relative">
+        {/* Left Panel Mobile Overlay */}
+        {leftPanelOpen && (
+          <div
+            className="fixed inset-0 bg-black/20 z-10 md:hidden animate-in fade-in duration-200"
+            onClick={toggleLeftPanel}
+          />
+        )}
+
         {/* Left Side Panel */}
         {leftPanelOpen && <LeftPanel projectId={projectId} />}
 
@@ -287,6 +295,14 @@ function CanvasInner({ projectId }: { projectId: string }) {
             />
           </ReactFlow>
         </main>
+
+        {/* Right Panel Mobile Overlay */}
+        {rightPanelOpen && (
+          <div
+            className="fixed inset-0 bg-black/20 z-10 md:hidden animate-in fade-in duration-200"
+            onClick={toggleRightPanel}
+          />
+        )}
 
         {/* Right Side Panel */}
         {rightPanelOpen && <PropertiesPanel />}
