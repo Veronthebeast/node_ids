@@ -93,7 +93,7 @@ export function LeftPanel({ projectId }: { projectId: string }) {
   };
 
   return (
-    <aside className="w-80 border-r border-border bg-surface flex flex-col h-full shrink-0 shadow-lg animate-in slide-in-from-left duration-200 md:relative absolute inset-y-0 left-0 z-20">
+    <aside className="w-[85vw] max-w-[320px] md:w-80 border-r border-border bg-surface flex flex-col h-full shrink-0 shadow-lg animate-in slide-in-from-left duration-200 md:relative absolute inset-y-0 left-0 z-20">
       {/* Cabecera Móvil */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-border shrink-0 md:hidden bg-surface-secondary/40">
         <span className="text-xs font-bold text-content-muted">Buscador y Pizarras</span>

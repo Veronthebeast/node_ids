@@ -24,6 +24,7 @@ import { useProjectsStore } from '@/stores/projects-store';
 import { useUIStore } from '@/stores/ui-store';
 import { CustomNode } from './custom-node';
 import { LeftPanel } from '../panels/left-panel';
+import { cn } from '@/lib/utils';
 import { PropertiesPanel } from '../panels/properties-panel';
 import { Button } from '../ui/button';
 import { useKeyboardShortcuts } from '@/hooks/use-keyboard-shortcuts';
@@ -37,6 +38,8 @@ import {
   Loader,
   Menu,
   Share2,
+  Lock,
+  Unlock,
 } from 'lucide-react';
 
 function CanvasInner({ projectId }: { projectId: string }) {
@@ -58,7 +61,16 @@ function CanvasInner({ projectId }: { projectId: string }) {
   const addEdgeDb = useConnectionsStore((s) => s.addEdgeDb);
 
   const { projects, fetchProjects } = useProjectsStore();
-  const { leftPanelOpen, rightPanelOpen, toggleLeftPanel, toggleRightPanel, theme, setMobileSidebarOpen } = useUIStore();
+  const {
+    leftPanelOpen,
+    rightPanelOpen,
+    toggleLeftPanel,
+    toggleRightPanel,
+    theme,
+    setMobileSidebarOpen,
+    nodesLocked,
+    toggleNodesLocked,
+  } = useUIStore();
 
   const [saving, setSaving] = useState(false);
   const [shareDialogOpen, setShareDialogOpen] = useState(false);
@@ -220,10 +232,10 @@ function CanvasInner({ projectId }: { projectId: string }) {
               variant="secondary"
               size="sm"
               onClick={() => setShareDialogOpen(true)}
-              className="text-xs h-8"
+              className="text-xs h-8 px-2 md:px-3"
             >
-              <Share2 className="w-4 h-4 mr-1.5" />
-              Compartir
+              <Share2 className="w-4 h-4 md:mr-1.5 mr-0" />
+              <span className="hidden md:inline">Compartir</span>
             </Button>
           )}
           
@@ -232,9 +244,10 @@ function CanvasInner({ projectId }: { projectId: string }) {
             variant="primary"
             size="sm"
             onClick={handleAddNodeAtCenter}
+            className="px-2 md:px-3"
           >
-            <Plus className="w-4 h-4 mr-1.5" />
-            Nodo
+            <Plus className="w-4 h-4 md:mr-1.5 mr-0" />
+            <span className="hidden md:inline">Nodo</span>
           </Button>
 
           <Button
@@ -274,6 +287,7 @@ function CanvasInner({ projectId }: { projectId: string }) {
             fitView
             minZoom={0.25}
             maxZoom={4}
+            nodesDraggable={!nodesLocked}
             colorMode={theme === 'dark' ? 'dark' : 'light'}
             className="bg-surface-secondary/20"
           >
@@ -290,6 +304,31 @@ function CanvasInner({ projectId }: { projectId: string }) {
               nodeColor={(n: any) => n.data?.color || '#6366f1'}
             />
           </ReactFlow>
+
+          {/* Floating Padlock Toggle (Modo Paneo) */}
+          <button
+            type="button"
+            onClick={toggleNodesLocked}
+            className={cn(
+              "absolute bottom-[72px] left-4 z-10 p-2.5 rounded-panel border shadow-md cursor-pointer transition-all duration-150 active:scale-95 flex items-center justify-center gap-1.5",
+              nodesLocked
+                ? "bg-red-500 border-red-500 text-white hover:bg-red-600"
+                : "bg-surface border-border text-content hover:bg-surface-secondary"
+            )}
+            title={nodesLocked ? "Desbloquear movimiento de nodos" : "Bloquear movimiento de nodos (Modo Paneo)"}
+          >
+            {nodesLocked ? (
+              <>
+                <Lock className="w-4 h-4" />
+                <span className="text-[10px] font-bold uppercase tracking-wider">Paneo</span>
+              </>
+            ) : (
+              <>
+                <Unlock className="w-4 h-4 text-content-muted" />
+                <span className="text-[10px] font-bold uppercase tracking-wider text-content-muted">Edición</span>
+              </>
+            )}
+          </button>
         </main>
 
         {/* Right Panel Mobile Overlay */}

@@ -61,7 +61,7 @@ export function PropertiesPanel() {
 
   if (!selectedNode) {
     return (
-      <aside className="w-80 border-l border-border bg-surface flex flex-col h-full shrink-0 md:relative absolute inset-y-0 right-0 z-20">
+      <aside className="w-[85vw] max-w-[320px] md:w-80 border-l border-border bg-surface flex flex-col h-full shrink-0 md:relative absolute inset-y-0 right-0 z-20">
         <div className="p-4 border-b border-border flex justify-between items-center">
           <h3 className="font-semibold text-content text-sm">Propiedades</h3>
           <Button variant="ghost" size="sm" onClick={toggleRightPanel} className="p-1 h-auto">
@@ -111,7 +111,7 @@ export function PropertiesPanel() {
   };
 
   return (
-    <aside className="w-80 border-l border-border bg-surface flex flex-col h-full shrink-0 shadow-lg animate-in slide-in-from-right duration-200 md:relative absolute inset-y-0 right-0 z-20">
+    <aside className="w-[85vw] max-w-[320px] md:w-80 border-l border-border bg-surface flex flex-col h-full shrink-0 shadow-lg animate-in slide-in-from-right duration-200 md:relative absolute inset-y-0 right-0 z-20">
       {/* Header */}
       <div className="p-4 border-b border-border flex justify-between items-center shrink-0">
         <div>
@@ -321,12 +321,13 @@ export function PropertiesPanel() {
                         completed: !item.completed,
                       })
                     }
-                    className="text-content-muted hover:text-content shrink-0"
+                    className="p-1.5 -ml-1 text-content-muted hover:text-content hover:bg-surface-secondary/80 rounded-md shrink-0 transition-colors cursor-pointer"
+                    title={item.completed ? "Desmarcar tarea" : "Marcar tarea"}
                   >
                     {item.completed ? (
-                      <CheckSquare className="w-4 h-4 text-green-500" />
+                      <CheckSquare className="w-5 h-5 text-green-500" />
                     ) : (
-                      <Square className="w-4 h-4" />
+                      <Square className="w-5 h-5" />
                     )}
                   </button>
                   <span
@@ -341,7 +342,8 @@ export function PropertiesPanel() {
                   <button
                     type="button"
                     onClick={() => deleteChecklistItemDb(item.id, selectedNode.id)}
-                    className="p-1 hover:bg-red-50 text-content-muted hover:text-red-600 rounded opacity-0 group-hover/todo:opacity-100 transition-opacity"
+                    className="p-1.5 hover:bg-red-50 text-content-muted hover:text-red-600 rounded opacity-100 md:opacity-0 md:group-hover/todo:opacity-100 transition-opacity cursor-pointer"
+                    title="Eliminar tarea"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>

@@ -42,6 +42,8 @@ export interface UIState {
   mobileSidebarOpen: boolean;
   /** Global active toasts. */
   toasts: Toast[];
+  /** Whether node dragging is locked (Modo Paneo). */
+  nodesLocked: boolean;
 
   // ---- Actions -----------------------------------------------------------
 
@@ -61,6 +63,8 @@ export interface UIState {
   addToast: (message: string, type?: 'success' | 'info' | 'error') => void;
   /** Remove a toast notification. */
   removeToast: (id: string) => void;
+  /** Toggle whether nodes are locked (draggable/static). */
+  toggleNodesLocked: () => void;
 }
 
 // ---------------------------------------------------------------------------
@@ -75,6 +79,7 @@ export const useUIStore = create<UIState>()(
     activePanel: 'none',
     mobileSidebarOpen: false,
     toasts: [],
+    nodesLocked: false,
 
     toggleTheme: () => {
       set((state) => {
@@ -125,6 +130,12 @@ export const useUIStore = create<UIState>()(
     removeToast: (id) => {
       set((state) => {
         state.toasts = state.toasts.filter((t) => t.id !== id);
+      });
+    },
+
+    toggleNodesLocked: () => {
+      set((state) => {
+        state.nodesLocked = !state.nodesLocked;
       });
     },
   })),
